@@ -7,7 +7,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
   const response = await document
     .query({
       TableName: "todo",
-      KeyConditionExpression: "userid = :userid",
+      KeyConditionExpression: "id = :userid",
       ExpressionAttributeValues: {
         ":userid": userid,
       },
@@ -15,7 +15,6 @@ export const handler: APIGatewayProxyHandler = async (event) => {
     .promise();
 
   const todoAlreadyExists = response.Items[0];
-  console.log(todoAlreadyExists);
 
   if (!todoAlreadyExists) {
     return {
